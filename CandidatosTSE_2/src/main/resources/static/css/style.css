@@ -1,0 +1,104 @@
+:root {
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: #233b44;
+    background: #eef3f4;
+    --destaque: #237a3b;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; }
+
+.cabecalho { padding: 32px max(24px, calc((100% - 1240px) / 2)); background: #205c32; color: #fff; border-bottom: 5px solid #e7bc67; }
+.edicao { display: block; margin-bottom: 10px; color: #f1d599; font-size: 11px; font-weight: 700; letter-spacing: 2px; }
+.cabecalho h1 { margin: 0 0 8px; font-size: 30px; font-weight: 600; }
+.cabecalho p { margin: 0; font-size: 14px; color: #d6e6e9; }
+
+.layout {
+    display: grid;
+    grid-template-columns: 260px minmax(0, 1fr);
+    gap: 20px;
+    max-width: 1280px;
+    margin: 28px auto;
+    padding: 0 20px;
+    align-items: start;
+}
+
+.painel-filtros, .card-candidato, .sem-resultados {
+    background: #fff;
+    border: 1px solid #dce5e7;
+    border-radius: 14px;
+    box-shadow: 0 3px 12px #183e4909;
+}
+.painel-filtros { padding: 20px; }
+.titulo-filtros { margin: 0 0 22px; padding-bottom: 14px; border-bottom: 1px solid #e3ebed; font-size: 17px; }
+fieldset { padding: 0; border: 0; margin: 0 0 18px; min-width: 0; }
+legend, .campo > label { font-weight: bold; color: var(--destaque); margin-bottom: 8px; }
+.opcao-genero { display: flex; align-items: center; gap: 7px; margin-bottom: 6px; font-size: 14px; }
+input[type="radio"] { margin: 0; accent-color: var(--destaque); }
+.campo { margin-bottom: 18px; }
+.campo > label { display: block; }
+select, input[type="number"] {
+    width: 100%;
+    min-width: 0;
+    padding: 9px 8px;
+    font: inherit;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+}
+.faixa-etaria { display: flex; gap: 7px; align-items: center; }
+.acoes { display: flex; gap: 8px; }
+button, .limpar {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid var(--destaque);
+    border-radius: 8px;
+    font: inherit;
+    font-size: 14px;
+    text-align: center;
+    cursor: pointer;
+}
+button { color: #fff; background: var(--destaque); }
+button:hover { background: #195c2b; }
+.limpar { color: var(--destaque); background: #fff; text-decoration: none; }
+.limpar:hover { background: #edf7ee; }
+:focus-visible { outline: 3px solid #398a4d; outline-offset: 3px; }
+
+.contagem { margin: 0 0 16px; font-size: 14px; padding: 8px 0; }
+.contagem strong { background: #dfefdf; color: #205c32; border-radius: 7px; padding: 4px 9px; margin-right: 4px; }
+.sem-resultados { padding: 24px; }
+.lista-candidatos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
+    gap: 16px;
+}
+.card-candidato { display: flex; gap: 16px; padding: 16px; }
+.card-candidato:hover { border-color: #93b9bd; box-shadow: 0 5px 16px #183e4912; }
+.foto-candidato {
+    width: 90px;
+    height: 90px;
+    aspect-ratio: 1;
+    object-fit: cover;
+    object-position: center top;
+    flex-shrink: 0;
+    align-self: flex-start;
+    border-radius: 50%;
+    background: #eef3f4;
+}
+.dados-candidato { min-width: 0; overflow-wrap: anywhere; }
+.dados-candidato h2 { margin: 0 0 5px; font-size: 15px; }
+.numero { display: inline-block; color: var(--destaque); background: #edf7f6; padding: 2px 6px; border-radius: 5px; font-size: 13px; margin-left: 4px; }
+.cargo { margin: 0 0 5px; color: #555; font-size: 12px; }
+.etiquetas { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 5px; }
+.etiqueta { padding: 2px 8px; border-radius: 12px; font-weight: bold; font-size: 11px; background: #eee; color: #555; }
+.etiqueta-f { background: #e0f2e3; color: #256337; }
+.etiqueta-m { background: #e1ecf7; color: #1f5c99; }
+.etiqueta-idade { background: #fff3d7; color: #8c5900; }
+.detalhe { margin: 4px 0 0; font-size: 11px; color: #666; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+@media (max-width: 800px) {
+    .layout { grid-template-columns: 1fr; }
+    .cabecalho h1 { font-size: 21px; }
+}
