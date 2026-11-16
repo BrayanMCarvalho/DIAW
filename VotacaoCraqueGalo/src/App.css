@@ -1,0 +1,440 @@
+/* =========================================================
+   App.css: Votação Craque do Jogo (Galo 2026)
+   Usa as variáveis e fontes definidas em index.css
+   ========================================================= */
+
+/* ---------- Estrutura das páginas ---------- */
+.pagina {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: clamp(1.5rem, 4vw, 3rem) 1.25rem 2rem;
+}
+
+.pagina-titulo {
+  color: var(--ouro);
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin-bottom: 0.6rem;
+}
+
+.pagina-subtitulo {
+  margin: 0 0 1.5rem;
+  font-size: 1.05rem;
+}
+
+.secao {
+  margin-top: 2.5rem;
+}
+
+.secao h2 {
+  color: var(--ouro);
+  font-size: 1.8rem;
+  margin-bottom: 0.4rem;
+}
+
+.secao p {
+  margin: 0 0 1.2rem;
+  color: var(--branco);
+  opacity: 0.85;
+}
+
+/* ---------- Grades de jogadores ---------- */
+
+/* 4 indicados: 4 colunas fixas no desktop */
+.grade-indicados {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.2rem;
+}
+
+/* suspenso e demais jogadores do elenco */
+.grade-elenco {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 1rem;
+}
+
+@media (max-width: 900px) {
+  .grade-indicados {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 520px) {
+  .grade-indicados {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- Card do jogador ---------- */
+.card {
+  position: relative; /* necessário para posicionar o selo com absolute */
+  display: flex;
+  flex-direction: column;
+  background: var(--grafite);
+  border: 3px solid var(--grafite-claro);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.45);
+  transition: transform 0.2s ease, outline-color 0.2s ease;
+}
+
+.card-foto {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  object-position: 50% 0; /* fotos em retrato: corta por baixo, rosto preservado */
+  background: #efefef;
+}
+
+.card-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 0.7rem 0.6rem 0.8rem;
+  text-align: center;
+}
+
+.card-nome {
+  font-size: 1.2rem;
+}
+
+.card-numero {
+  color: var(--ouro);
+}
+
+.card-posicao {
+  margin: 0.25rem 0 0.2rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--cinza);
+}
+
+/* Uma classe para cada situação */
+.card-indicado {
+  border-color: var(--ouro);
+}
+
+.card-suspenso {
+  border-color: var(--amarelo);
+}
+
+.card-elenco {
+  filter: grayscale(1);
+}
+
+/* elenco e suspenso (sem botão) um pouco mais compactos */
+.grade-elenco .card-nome {
+  font-size: 0.95rem;
+}
+
+.grade-elenco .card-info {
+  justify-content: center;
+  padding: 0.5rem 0.4rem 0.6rem;
+}
+
+.grade-elenco .card-posicao {
+  margin-bottom: 0;
+}
+
+/* Card selecionado: contorno verde e "sobe" um pouco */
+.card-selecionado {
+  outline: 5px solid var(--gramado);
+  outline-offset: 4px;
+  transform: translateY(-8px);
+}
+
+/* ---------- Selos ---------- */
+.selo {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 3px;
+  font-family: var(--fonte-titulo);
+  font-weight: 800;
+  font-size: 0.85rem;
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: var(--preto);
+}
+
+/* selo posicionado sobre a foto, no canto do card */
+.card .selo {
+  position: absolute;
+  top: 0.6rem;
+  left: 0.6rem;
+  z-index: 1;
+}
+
+.selo-indicado {
+  background: var(--ouro);
+}
+
+.selo-suspenso {
+  background: var(--amarelo);
+}
+
+.selo-craque {
+  background: var(--ouro);
+}
+
+.selo-vice {
+  background: var(--prata);
+}
+
+/* ---------- Botão Selecionar (dentro do card) ---------- */
+.card-botao {
+  margin-top: auto;
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  border: 2px solid var(--branco);
+  border-radius: 8px;
+  background: var(--preto);
+  color: var(--branco);
+  font: 800 1rem var(--fonte-texto);
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.card-botao:hover {
+  background: var(--grafite-claro);
+}
+
+.card-botao:focus-visible {
+  outline: 3px solid var(--ouro);
+  outline-offset: 3px;
+}
+
+.card-selecionado .card-botao {
+  background: var(--gramado);
+  border-color: var(--gramado);
+  box-shadow: 0 4px 0 #1f7a33;
+}
+
+/* ---------- Barra de confirmação (fixa na parte de baixo) ---------- */
+.confirmacao {
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+  padding: 1rem 1.2rem;
+  background: var(--preto);
+  border: 3px solid var(--ouro);
+  border-radius: 10px;
+}
+
+.confirmacao p {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.confirmacao strong {
+  color: var(--ouro);
+}
+
+/* botão desabilitado */
+.botao:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.botao:disabled:hover {
+  filter: none;
+}
+
+.botao:disabled:active {
+  transform: none;
+}
+
+/* ---------- Histórico da sessão ---------- */
+.historico {
+  margin-top: 1.5rem;
+  padding: 1rem 1.2rem 1.2rem;
+  background: var(--gramado);
+  border-radius: 10px;
+}
+
+.historico h3 {
+  margin-bottom: 0.6rem;
+  font-size: 1.3rem;
+}
+
+.historico ol {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 0.3rem 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: decimal inside;
+}
+
+.historico-link {
+  display: inline-block;
+  margin-top: 0.8rem;
+  font-weight: 800;
+  color: var(--branco);
+  text-decoration: underline;
+}
+
+/* ---------- Resultado ---------- */
+.total-votos {
+  margin: 0 0 1.5rem;
+}
+
+.total-votos strong {
+  font-family: var(--fonte-titulo);
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--ouro);
+}
+
+.sem-votos {
+  padding: 2rem 1.2rem;
+  text-align: center;
+  background: var(--grafite);
+  border: 2px dashed var(--grafite-claro);
+  border-radius: 10px;
+}
+
+.sem-votos p {
+  margin: 0 0 1.2rem;
+  font-size: 1.1rem;
+}
+
+.disputa {
+  margin: 0 0 1rem;
+  padding: 0.8rem 1rem;
+  background: var(--grafite);
+  border-left: 4px solid var(--ouro);
+  border-radius: 4px;
+  font-weight: 800;
+}
+
+.placar {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.placar-item {
+  display: grid;
+  grid-template-columns: 3rem 72px 1fr;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem 1rem;
+  background: var(--grafite);
+  border: 3px solid var(--grafite-claro);
+  border-radius: 10px;
+}
+
+.placar-craque {
+  border-color: var(--ouro);
+}
+
+.placar-vice {
+  border-color: var(--prata);
+}
+
+.placar-posicao {
+  font-family: var(--fonte-titulo);
+  font-weight: 800;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.placar-foto {
+  width: 72px;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  object-position: 50% 0;
+  background: #efefef;
+  border-radius: 4px;
+}
+
+.placar-topo {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.2rem 0.8rem;
+}
+
+.placar-topo h3 {
+  font-size: 1.6rem;
+}
+
+/* barra de progresso */
+.barra {
+  height: 16px;
+  margin: 0.6rem 0 0.5rem;
+  overflow: hidden;
+  background: var(--grafite-claro);
+  border-radius: 999px;
+}
+
+.barra-preenchida {
+  height: 100%;
+  background: var(--cinza);
+  border-radius: 999px;
+  transition: width 0.6s ease;
+}
+
+.placar-craque .barra-preenchida {
+  background: var(--ouro);
+}
+
+.placar-vice .barra-preenchida {
+  background: var(--prata);
+}
+
+.placar-texto {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 800;
+}
+
+/* botões da página de resultado */
+.acoes-resultado {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+.botao-claro {
+  background: var(--branco);
+  color: var(--preto);
+  box-shadow: 0 4px 0 #8a8a8a;
+}
+
+.botao-contorno {
+  background: transparent;
+  color: var(--branco);
+  box-shadow: inset 0 0 0 2px var(--branco);
+}
+
+@media (max-width: 520px) {
+  .placar-item {
+    grid-template-columns: 2.2rem 56px 1fr;
+    gap: 0.7rem;
+    padding: 0.7rem;
+  }
+
+  .placar-foto {
+    width: 56px;
+  }
+
+  .placar-posicao {
+    font-size: 1.5rem;
+  }
+
+  .placar-topo h3 {
+    font-size: 1.3rem;
+  }
+}
